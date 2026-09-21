@@ -1,17 +1,12 @@
-export async function onRequest(context) {
-    const { env } = context;
-
-    let count = await env.VIEWS_KV.get("page_views");
-    count = count ? parseInt(count, 10) : 0;
-
-    count += 1;
-
-    await env.VIEWS_KV.put("page_views", count.toString());
-
-    return new Response(JSON.stringify({ views: count }), {
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-        },
-    });
+async function updateViewCount() {
+    try {
+        const response = await fetch('/api/view');
+        if (!response.ok) throw new Error('Failed to fetch view count');
+        
+        const data = await response.json();
+        document.getElementById('view-count').textContent = `${data.views} views`;
+    } catch (error) {
+        console.error('Error fetching views:', error);
+        document.getElementById('view-count').textContent = '1 view';
+    }
 }
