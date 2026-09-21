@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Diagnosis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        #view-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1> I have Psychosis. </h1>
+    <p>My name is Josh Clark, also known online as Polar, Haunt, Krush, and other names. My involvement in Gorilla Tag, Gorilla Tag Copies, and the VR industry as a whole brought me to fame, and I have been a part of the community for years.</p>
+    <p>Psychosis is a mental health condition characterized by a disconnection from reality. It can manifest in various ways, including hallucinations, delusions, and disorganized thinking. Individuals experiencing psychosis may have difficulty distinguishing between what is real and what is not.</p>
+    <p>Common symptoms of psychosis include hearing voices, seeing things that aren't there, and holding false beliefs that are not based in reality. I was professionally diagnosed with psychosis by a qualified mental health professional after a thorough evaluation of my symptoms and experiences.</p>
+    <p>I'm only 15, and I've already basically lost control over the rest of my life. I'm writing this before I spiral into a stage of psychosis where I can't even write this. I have to get this out before I lose the ability to do so.</p>
+    <p>I hope that I'm not forgotten, although I know that I deserve to be forgotten for my past. For those who are reading this that have known me, this isn't an attempt for attention, I already have plenty of that with Disband. I just want everyone to know what actually happened before I begin to spiral into a state of psychosis, turning me mentally insane, if I'm not already.</p>
+    <p>Every great programmer has a condition. Terry Davis, the creator of TempleOS, had schizophrenia. And in return, he produced the worlds first operating system written with a custom compiler, custom graphics engine, etc. all on his own. Mark Zuckerberg has autisim, and in return, he fixes the world.</p>
+    <p>I'm constantly derealizing, hallucinating, and experiencing a sense of detachment from my surroundings. It's hard to tell what's real from what's fake. I don't know how much longer I can necessarily fight my own brain.</p>
+    <p>I have left all of my work published on https://www.wsgpolar.com, and https://www.joshclark.xyz.</p>
+
+    <div id="view-counter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+        </svg>
+        <span id="view-count">Loading views...</span>
+    </div>
+
+    <script>
+        async function updateViewCount() {
+            try {
+                const response = await fetch('/api/views');
+                if (!response.ok) throw new Error('Failed to fetch view count');
+                
+                const data = await response.json();
+                document.getElementById('view-count').textContent = `${data.views} views`;
+            } catch (error) {
+                console.error('Error fetching views:', error);
+                document.getElementById('view-count').textContent = '1 view';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateViewCount);
+    </script>
+</body>
+</html>
