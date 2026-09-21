@@ -47,11 +47,16 @@
     <script>
         async function updateViewCount() {
             try {
-                const response = await fetch('/api/view'); // js api counter
-                if (!response.ok) throw new Error('Failed to fetch view count');
-                
+                const response = await fetch('/api/views', { cache: 'no-store' });
+                if (!response.ok) throw new Error(`/api/views returned HTTP ${response.status}`);
+
+                const contentType = response.headers.get('content-type') || '';
+                if (!contentType.includes('application/json')) {
+                    throw new Error(`/api/views returned ${contentType || 'non-JSON'} — the Pages Function is not running (static fallback served instead)`);
+                }
+
                 const data = await response.json();
-                document.getElementById('view-count').textContent = `${data.views} views`;
+                document.getElementById('view-count').textContent = `${data.views} ${data.views === 1 ? 'view' : 'views'}`;
             } catch (error) {
                 console.error('Error fetching views:', error);
                 document.getElementById('view-count').textContent = '1 view';
