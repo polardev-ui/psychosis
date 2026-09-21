@@ -1,0 +1,7 @@
+name = "psychosis"
+compatibility_date = "2026-09-21"
+pages_build_output_dir = "."
+
+[[kv_namespaces]]
+binding = "VIEWS_KV"
+id = "VIEWS_KV"
